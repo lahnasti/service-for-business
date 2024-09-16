@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: nastya
+      POSTGRES_PASSWORD: pgspgs
+      POSTGRES_DB: avito
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - SERVER_ADDRESS=:8080
+      - MIGRATE_PATH=/app/src/migrations
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USERNAME=nastya
+      - POSTGRES_PASSWORD=pgspgs
+      - POSTGRES_DATABASE=avito
+    ports:
+      - "8080:8080"
+
+volumes:
+  pg_data:

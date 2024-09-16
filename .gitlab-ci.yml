@@ -1,0 +1,40 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  APP_PORT: 8080
+
+# Задача сборки приложения
+build-job:
+  stage: build
+  image: golang:1.22.4
+  script:
+    - go mod download  # Загрузка зависимостей
+    - go build -o main ./src/cmd/main.go
+  artifacts:
+    paths:
+      - main
+# Задача тестирования
+test-job:
+  stage: test
+  image: golang:1.19
+  script:
+    - go test ./src/internal/server/tenders_test.go
+  dependencies:
+    - build-job  # Зависимость от предыдущего шага
+
+deploy-job:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying application to ${CI_PROJECT_NAME}-${CI_PROJECT_ID}.avito2024.codenrock.com"
+    - ./myapp &  # Запуск приложения в фоновом режиме на порту 8080
+  only:
+    - main  # Выполнять деплой только из ветки main
+  environment:
+    name: production
+    url: https://${CI_PROJECT_NAME}-${CI_PROJECT_ID}.avito2024.codenrock.com  # Указание ссылки на развернутый проект
+  dependencies:
+    - build-job  # Зависимость от задачи сборки
