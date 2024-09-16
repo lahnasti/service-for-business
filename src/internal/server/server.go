@@ -8,7 +8,6 @@ import (
 	"github.com/rs/zerolog"
 )
 
-// TODO: validation add
 type TendersRepo interface {
 	GetAllTenders(string) ([]models.Tender, error)
 	GetTendersByUser(string) ([]models.Tender, error)
@@ -28,11 +27,19 @@ type BidsRepo interface {
 	SubmitDecision(int, string) error
 	DeclineDecision(int, string) error
 	CheckUserPermissionForBid(int, string) (bool, error)
+	CheckUserPermissionForTender(int, string) (bool, error)
+	GetTenderIDByBidID(int) (int, error)
+}
+
+type FeedbackReview interface {
+	AddFeedback(models.Review, string) error
+	GetReviewsByAuthorAndTender(int, string, int) ([]models.Review, error)
 }
 
 type Repository interface {
 	TendersRepo
 	BidsRepo
+	FeedbackReview
 }
 
 type Server struct {

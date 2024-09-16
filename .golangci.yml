@@ -5,3 +5,9 @@ linters:
     - gofmt
   disable:
     - errcheck
+
+linters-settings:
+  gofmt:
+    simplify: true  # Включает упрощение кода, которое предоставляет gofmt
+  staticcheck:
+    checks: ["all"]  # Запускает все проверки staticcheck

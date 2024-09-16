@@ -74,12 +74,21 @@ CREATE TABLE IF NOT EXISTS bid_history (
     version INT
 );
 
-CREATE TABLE IF NOT EXISTS bid_decision (
+CREATE TABLE IF NOT EXISTS bid_decisions (
     id SERIAL PRIMARY KEY,
     bid_id INT NOT NULL REFERENCES bid(id) ON DELETE CASCADE,
     username VARCHAR(50) REFERENCES employee(username) ON DELETE CASCADE,
     decision_status VARCHAR(50) CHECK (decision_status IN ('SUBMITTED', 'DECLINED')),
     decision_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id SERIAL PRIMARY KEY,
+    bid_id INT NOT NULL REFERENCES bid(id) ON DELETE CASCADE,
+    username VARCHAR(50) REFERENCES employee(username) ON DELETE CASCADE,
+    organization_id INT REFERENCES organization(id) ON DELETE CASCADE,
+    comment TEXT NOT NULL
 );
 
 INSERT INTO employee (username, first_name, last_name) VALUES

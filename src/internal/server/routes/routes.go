@@ -34,6 +34,9 @@ func SetupRoutes(s *server.Server) *gin.Engine {
 		bidsGroup.PATCH("/:id/submit_decision", s.SubmitDecisionHandler)
 		bidsGroup.PATCH("/:id/decline_decision", s.SubmitDeclinedHandler)
 
+		//отзывы
+		bidsGroup.POST("/feedback", s.AddFeedbackHandler)
+		bidsGroup.GET("/:tenderID/reviews", s.GetReviewsHandler)
 		// GET /api/bids/1/reviews?authorUsername=user2&organizationId=1
 		//}
 		return r

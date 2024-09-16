@@ -6,3 +6,4 @@ DROP TABLE IF EXISTS bid;
 DROP TABLE IF EXISTS tender_history;
 DROP TABLE IF EXISTS bid_history;
 DROP TABLE IF EXISTS bid_decision;
+DROP TABLE IF EXISTS reviews;

@@ -187,12 +187,12 @@ func (s *Server) SubmitDecisionHandler(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Bid approved and tender closed"})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Bid approved"})
 }
 
 func (s *Server) SubmitDeclinedHandler(ctx *gin.Context) {
 	// Получаем идентификатор предложения (bidID) из параметров URL
-	bidIDStr := ctx.Param("bidID")
+	bidIDStr := ctx.Param("id")
 	bidID, err := strconv.Atoi(bidIDStr)
 	if err != nil {
 		s.log.Error().Err(err).Msg("Invalid bid ID")
