@@ -29,7 +29,7 @@
 ### Запуск с использованием Docker Compose
 1. Клонируйте репозиторий проекта:
    ```bash
-   https: https://github.com/lahnasti/service-for-business.git
+   https: https://github.com/lahnasti/zadanie-6105.git
    cd zadanie-6105
 2. Применение конфигурации линтера: `golangci-lint run -c .golangci.yml `
 3. Запустите сервисы с помощью Docker Compose:
