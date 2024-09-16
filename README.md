@@ -24,7 +24,7 @@
 ### Запуск с использованием Docker Compose
 1. Клонируйте репозиторий проекта:
    ```bash
-   https: git clone https://git.codenrock.com/avito-testirovanie-na-backend-1270/cnrprod1725726028-team-79521/zadanie-6105.git
+   https: https://github.com/lahnasti/service-for-business.git
    cd zadanie-6105
 2. Применение конфигурации линтера: `golangci-lint run -c .golangci.yml `
 3. Запустите сервисы с помощью Docker Compose:
